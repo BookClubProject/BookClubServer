@@ -8,8 +8,9 @@ import bookclub.bookclubspring.web.dto.PostsSaveRequestDto;
 import bookclub.bookclubspring.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -39,7 +40,7 @@ public class PostService {
     }
 
     @Transactional(readOnly = true)
-    public Object findAllDesc() {
+    public List<PostsListResponseDto> findAllDesc() {
         return postsRepository.findAllDesc().stream()
                 .map(PostsListResponseDto::new)
                 .collect(Collectors.toList());
@@ -52,4 +53,5 @@ public class PostService {
 
         postsRepository.delete(posts);
     }
+
 }

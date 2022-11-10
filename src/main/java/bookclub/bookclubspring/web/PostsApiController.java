@@ -1,6 +1,9 @@
-package bookclub.bookclubspring.web.dto;
+package bookclub.bookclubspring.web;
 
 import bookclub.bookclubspring.service.posts.PostService;
+import bookclub.bookclubspring.web.dto.PostsResponseDto;
+import bookclub.bookclubspring.web.dto.PostsSaveRequestDto;
+import bookclub.bookclubspring.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

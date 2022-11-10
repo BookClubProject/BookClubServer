@@ -1,5 +1,7 @@
 package bookclub.bookclubspring.config.auth;
 
+import bookclub.bookclubspring.config.auth.dto.OAuthAttributes;
+import bookclub.bookclubspring.config.auth.dto.SessionUser;
 import bookclub.bookclubspring.domain.user.User;
 import bookclub.bookclubspring.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -38,13 +40,13 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority(user.getRoleKey())),
-                attributes.getAttributes(),
-                attributes.getNameAttributeKey());
+                attributes  .getAttributes(),
+                attributes  .getNameAttributeKey());
     }
 
     private User saveOrUpdate(OAuthAttributes attributes) {
         User user = userRepository.findByEmail(attributes.getEmail())
-                .map(entity -> entity.update(attributes.getName(),attributes.getPicture()))
+                .map(entity -> entity.update(attributes.getName(),attributes.getMobile()))
                 .orElse(attributes.toEntity());
 
         return userRepository.save(user);

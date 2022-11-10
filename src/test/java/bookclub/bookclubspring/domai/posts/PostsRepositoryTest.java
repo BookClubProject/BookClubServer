@@ -1,4 +1,4 @@
-package bookclub.bookclubspring.testdomain.posts;
+package bookclub.bookclubspring.domai.posts;
 
 import bookclub.bookclubspring.domain.posts.Posts;
 import bookclub.bookclubspring.domain.posts.PostsRepository;
