@@ -29,13 +29,36 @@ public class PostsRepositoryTest {
     @Test
     public void 게시글저장_블러오기() {
         //given
-        String title = "테스트 게시글";
+        String bookTitle = "책제목";
+        String bookImage = "책이미지";
+        String price = "가격";
+        String year = "연";
+        String month = "월";
+        String date = "일";
+        String day = "요일";
+        String time = "시간";
+        String state = "온오프라인";
+        String location = "주소";
+        String detailLocation = "상세주소";
+        String theme = "테마";
+        String author = "저자";
         String content = "테스트 본문";
 
         postsRepository.save(Posts.builder()
-                .title(title)
+                .bookImage(bookImage)
+                .bookTitle(bookTitle)
+                .price(price)
+                .year(year)
+                .month(month)
+                .date(date)
+                .day(day)
+                .time(time)
+                .state(state)
+                .location(location)
+                .detailLocation(detailLocation)
+                .theme(theme)
                 .content(content)
-                .author("b088081@gmail.com")
+                .author(author)
                 .build());
 
         //when
@@ -43,7 +66,19 @@ public class PostsRepositoryTest {
 
         //then
         Posts posts = postsList.get(0);
-        assertThat(posts.getTitle()).isEqualTo(title);
+        assertThat(posts.getBookImage()).isEqualTo(bookImage);
+        assertThat(posts.getBookTitle()).isEqualTo(bookTitle);
+        assertThat(posts.getPrice()).isEqualTo(price);
+        assertThat(posts.getYear()).isEqualTo(year);
+        assertThat(posts.getMonth()).isEqualTo(month);
+        assertThat(posts.getDate()).isEqualTo(date);
+        assertThat(posts.getDay()).isEqualTo(day);
+        assertThat(posts.getTime()).isEqualTo(time);
+        assertThat(posts.getState()).isEqualTo(state);
+        assertThat(posts.getLocation()).isEqualTo(location);
+        assertThat(posts.getDetailLocation()).isEqualTo(detailLocation);
+        assertThat(posts.getTheme()).isEqualTo(theme);
+        assertThat(posts.getAuthor()).isEqualTo(author);
         assertThat(posts.getContent()).isEqualTo(content);
     }
 
@@ -52,7 +87,18 @@ public class PostsRepositoryTest {
         //given
         LocalDateTime now = LocalDateTime.of(2020,03,17,0,0,0);
         postsRepository.save(Posts.builder()
-                .title("title")
+                .bookImage("bookImage")
+                .bookTitle("bookTitle")
+                .price("price")
+                .year("year")
+                .month("month")
+                .date("date")
+                .day("day")
+                .time("time")
+                .state("state")
+                .location("location")
+                .detailLocation("detailLocation")
+                .theme("theme")
                 .content("content")
                 .author("author")
                 .build());
@@ -64,7 +110,7 @@ public class PostsRepositoryTest {
         Posts posts = postsList.get(0);
 
         System.out.println(">>>>>>>>>>> createDate="+posts.getCreateDate()
-                +", modeifeidDate="+posts.getModifiedDate());
+                +", modifiedDate="+posts.getModifiedDate());
 
 
         assertThat(posts.getCreateDate()).isAfter(now);

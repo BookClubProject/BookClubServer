@@ -11,20 +11,32 @@ import java.util.Map;
 public class OAuthAttributes {
     private Map<String, Object> attributes;
     private String nameAttributeKey;
-    private String name;
+    private String nickname;
     private String email;
+    private String picture;
     private String mobile;
+    private String nickName;
+    private String introduce;
+    private Boolean reservationReminder;
+    private Boolean alert;
 
     @Builder
     public OAuthAttributes(Map<String, Object> attributes,
-                           String nameAttributeKey, String name,
-                           String email, String mobile) {
+                           String nameAttributeKey, String nickname,
+                           String email, String picture, String mobile,
+                           String introduce, Boolean reservationReminder, Boolean alert) {
         this.attributes = attributes;
         this.nameAttributeKey= nameAttributeKey;
-        this.name = name;
+        this.nickname = nickname;
         this.email = email;
+        this.picture = picture;
         this.mobile = mobile;
+        this.introduce = introduce;
+        this.reservationReminder = reservationReminder;
+        this.alert = alert;
     }
+
+
 
     public static OAuthAttributes of(String registrationId,
                                      String userNameAttributeName,
@@ -41,9 +53,9 @@ public class OAuthAttributes {
         Map<String, Object> response = (Map<String, Object>) attributes.get("response");
 
         return OAuthAttributes.builder()
-                .name((String) response.get("name"))
+                .nickname((String) response.get("name"))
                 .email((String) response.get("email"))
-                .mobile((String) response.get("mobile"))
+                .picture((String) response.get("profile_image"))
                 .attributes(response)
                 .nameAttributeKey(userNameAttributeName)
                 .build();
@@ -52,9 +64,9 @@ public class OAuthAttributes {
     private static OAuthAttributes ofGoogle(String userNameAttributeName,
                                             Map<String, Object> attributes) {
         return OAuthAttributes.builder()
-                .name((String) attributes.get("name"))
+                .nickname((String) attributes.get("name"))
                 .email((String) attributes.get("email"))
-                .mobile((String) attributes.get("mobile"))
+                .picture((String) attributes.get("picture"))
                 .attributes(attributes)
                 .nameAttributeKey(userNameAttributeName)
                 .build();
@@ -63,10 +75,10 @@ public class OAuthAttributes {
 
     public User toEntity() {
         return User.builder()
-                .name(name)
+                .name(nickname)
                 .email(email)
-                .mobile(mobile)
-                .role(Role.GUSET)
+                .picture(picture)
+                .role(Role.USER) // 가입 후 최초 설정 - 일반 사용자로 함 (GUEST는 글 작성 불가능)
                 .build();
     }
 }

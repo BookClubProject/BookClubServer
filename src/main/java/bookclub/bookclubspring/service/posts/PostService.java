@@ -2,6 +2,8 @@ package bookclub.bookclubspring.service.posts;
 
 import bookclub.bookclubspring.domain.posts.Posts;
 import bookclub.bookclubspring.domain.posts.PostsRepository;
+import bookclub.bookclubspring.domain.user.User;
+import bookclub.bookclubspring.domain.user.UserRepository;
 import bookclub.bookclubspring.web.dto.PostsListResponseDto;
 import bookclub.bookclubspring.web.dto.PostsResponseDto;
 import bookclub.bookclubspring.web.dto.PostsSaveRequestDto;
@@ -17,10 +19,17 @@ import java.util.stream.Collectors;
 @Service
 public class PostService {
     private final PostsRepository postsRepository;
+    private final UserRepository userRepository;
 
     @Transactional
-    public Long save(PostsSaveRequestDto requestDto) {
-        return postsRepository.save(requestDto.toEntity()).getId();
+    public Long save(String nickName, PostsSaveRequestDto requestDto) {
+        User user = userRepository.findByNickName(nickName);
+        requestDto.setUser(user);
+
+        Posts posts = requestDto.toEntity();
+        postsRepository.save(posts);
+
+        return posts.getId();
     }
 
     @Transactional
@@ -28,7 +37,7 @@ public class PostService {
         Posts posts = postsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id="+ id));
 
-        posts.update(requestDto.getTitle(), requestDto.getContent());
+        posts.update(requestDto.getYear(), requestDto.getMonth(), requestDto.getDate(), requestDto.getDate(), requestDto.getTime(), requestDto.getState(), requestDto.getLocation(), requestDto.getDetailLocation(), requestDto.getTheme(), requestDto.getContent());
         return id;
     }
 

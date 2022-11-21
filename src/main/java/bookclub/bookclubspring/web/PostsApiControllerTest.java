@@ -42,12 +42,36 @@ public class PostsApiControllerTest {
     @Test
     public void Posts_등록된다() throws Exception {
         //given
-        String title = "title";
+        String bookTitle = "bookTitle";
         String content = "content";
+        String bookImage = "bookImage";
+        String price ="price";
+        String year = "year";
+        String month = "month";
+        String date = "date";
+        String day = "day";
+        String time = "time";
+        String state = "state";
+        String location = "location";
+        String detailLocation = "detailLocation";
+        String theme = "theme";
+        String author = "author";
+
         PostsSaveRequestDto requestDto = PostsSaveRequestDto.builder()
-                .title(title)
+                .bookImage(bookImage)
+                .bookTitle(bookTitle)
+                .price(price)
+                .year(year)
+                .month(month)
+                .date(date)
+                .day(day)
+                .time(time)
+                .state(state)
+                .location(location)
+                .detailLocation(detailLocation)
+                .theme(theme)
                 .content(content)
-                .author("author")
+                .author(author)
                 .build();
 
         String url = "http://localhost:" + port + "/api/v1/posts";
@@ -60,24 +84,59 @@ public class PostsApiControllerTest {
         assertThat(responseEntity.getBody()).isGreaterThan(0L);
 
         List<Posts> all = postsRepository.findAll();
-        assertThat(all.get(0).getTitle()).isEqualTo(title);
+        assertThat(all.get(0).getBookImage()).isEqualTo(bookImage);
+        assertThat(all.get(0).getBookTitle()).isEqualTo(bookTitle);
+        assertThat(all.get(0).getPrice()).isEqualTo(price);
+        assertThat(all.get(0).getYear()).isEqualTo(year);
+        assertThat(all.get(0).getMonth()).isEqualTo(month);
+        assertThat(all.get(0).getDate()).isEqualTo(date);
+        assertThat(all.get(0).getDay()).isEqualTo(day);
+        assertThat(all.get(0).getTime()).isEqualTo(time);
+        assertThat(all.get(0).getState()).isEqualTo(state);
+        assertThat(all.get(0).getLocation()).isEqualTo(location);
+        assertThat(all.get(0).getDetailLocation()).isEqualTo(detailLocation);
+        assertThat(all.get(0).getTheme()).isEqualTo(theme);
         assertThat(all.get(0).getContent()).isEqualTo(content);
+        assertThat(all.get(0).getAuthor()).isEqualTo(author);
     }
 
     @Test
     public void Posts_수정된다() throws Exception {
         //given
         Posts savePosts = postsRepository.save(Posts.builder()
-                .title("title")
+                .year("year")
+                .month("month")
+                .date("date")
+                .day("day")
+                .time("time")
+                .state("state")
+                .location("location")
+                .detailLocation("detailLocation")
+                .theme("theme")
                 .content("content")
-                .author("author")
                 .build());
 
         Long updateId = savePosts.getId();
-        String expectedTitle = "title2";
+        String expectedYear = "year2";
+        String expectedMonth = "month2";
+        String expectedDate = "date2";
+        String expectedDay = "day2";
+        String expectedTime = "time2";
+        String expectedState = "state2";
+        String expectedLocation = "location2";
+        String expectedDetailLocation = "detailLocation2";
+        String expectedTheme = "theme2";
         String expectedContent = "content2";
         PostsUpdateRequestDto requestDto = PostsUpdateRequestDto.builder()
-                .title(expectedTitle)
+                .year(expectedYear)
+                .month(expectedMonth)
+                .date(expectedDate)
+                .day(expectedDay)
+                .time(expectedTime)
+                .state(expectedState)
+                .location(expectedLocation)
+                .detailLocation(expectedDetailLocation)
+                .theme(expectedTheme)
                 .content(expectedContent)
                 .build();
 
@@ -93,7 +152,15 @@ public class PostsApiControllerTest {
         assertThat(responseEntity.getBody()).isGreaterThan(0L);
 
         List<Posts> all = postsRepository.findAll();
-        assertThat(all.get(0).getTitle()).isEqualTo(expectedTitle);
+        assertThat(all.get(0).getYear()).isEqualTo(expectedYear);
+        assertThat(all.get(0).getMonth()).isEqualTo(expectedMonth);
+        assertThat(all.get(0).getDate()).isEqualTo(expectedDate);
+        assertThat(all.get(0).getDay()).isEqualTo(expectedDay);
+        assertThat(all.get(0).getTime()).isEqualTo(expectedTime);
+        assertThat(all.get(0).getState()).isEqualTo(expectedState);
+        assertThat(all.get(0).getLocation()).isEqualTo(expectedLocation);
+        assertThat(all.get(0).getDetailLocation()).isEqualTo(expectedDetailLocation);
+        assertThat(all.get(0).getTheme()).isEqualTo(expectedTheme);
         assertThat(all.get(0).getContent()).isEqualTo(expectedContent);
     }
 }

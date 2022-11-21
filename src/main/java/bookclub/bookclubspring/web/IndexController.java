@@ -22,7 +22,7 @@ public class IndexController {
         model.addAttribute("posts", postService.findAllDesc());
 
         if(user != null){
-            model.addAttribute("userName", user.getName());
+            model.addAttribute("userName", user.getNickname());
         }
 
         return "index";
@@ -41,4 +41,22 @@ public class IndexController {
 
         return "posts-update";
     }
+
+    @GetMapping("/posts/read/{id}")
+    public String read(@PathVariable Long id, @LoginUser SessionUser user, Model model) {
+        PostsResponseDto dto = postService.findById(id);
+
+        if (user != null) {
+            model.addAttribute("user", user.getNickname());
+
+            /*게시글 작성자 본인인지 확인*/
+            if (dto.getUserId().equals(user.getId())) {
+                model.addAttribute("writer", true);
+            }
+        }
+        model.addAttribute("posts", dto);
+
+        return "posts/posts-read";
+    }
+
 }

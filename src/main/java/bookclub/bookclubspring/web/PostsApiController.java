@@ -1,10 +1,13 @@
 package bookclub.bookclubspring.web;
 
+import bookclub.bookclubspring.config.auth.LoginUser;
+import bookclub.bookclubspring.config.auth.dto.SessionUser;
 import bookclub.bookclubspring.service.posts.PostService;
 import bookclub.bookclubspring.web.dto.PostsResponseDto;
 import bookclub.bookclubspring.web.dto.PostsSaveRequestDto;
 import bookclub.bookclubspring.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -14,9 +17,8 @@ public class PostsApiController {
     private final PostService postService;
 
     @PostMapping("/api/v1/posts")
-    public Long save(@RequestBody PostsSaveRequestDto requestDto) {
-
-        return postService.save(requestDto);
+    public ResponseEntity save(@RequestBody PostsSaveRequestDto requestDto, @LoginUser SessionUser sessionUser) {
+        return ResponseEntity.ok(postService.save(sessionUser.getEmail(), requestDto));
     }
 
     @PutMapping("/api/v1/posts/{id}")
