@@ -19,7 +19,7 @@ public class Review {
     private Long postId;
 
     @Column(nullable = false)
-    private String email;
+    private String writer;
 
     @Column(length = 500, nullable = false)
     private String title;
@@ -28,15 +28,15 @@ public class Review {
     private String content;
 
     @Builder
-    public Review(Long postId, String email, String title, String content) {
+    public Review(Long postId, String writer, String title, String content) {
         this.postId = postId;
-        this.email = email;
+        this.writer = writer;
         this.title = title;
         this.content = content;
     }
 
-    public void update(String email, String title, String content) {
-        this.email = email;
+    public void update(String writer, String title, String content) {
+        this.writer = writer;
         this.title = title;
         this.content = content;
     }

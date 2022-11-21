@@ -6,14 +6,14 @@ import lombok.Builder;
 
 public class PersonalInquirySaveRequestDto {
     private Long postId;
-    private String email;
+    private String writer;
     private String title;
     private String content;
 
     @Builder
-    public PersonalInquirySaveRequestDto(Long postId, String email, String title, String content) {
+    public PersonalInquirySaveRequestDto(Long postId, String writer, String title, String content) {
         this.postId = postId;
-        this.email = email;
+        this.writer = writer;
         this.title = title;
         this.content = content;
     }
@@ -21,7 +21,7 @@ public class PersonalInquirySaveRequestDto {
     public PersonalInquiry toEntity() {
         return PersonalInquiry.builder()
                 .postId(postId)
-                .email(email)
+                .writer(writer)
                 .title(title)
                 .content(content)
                 .build();

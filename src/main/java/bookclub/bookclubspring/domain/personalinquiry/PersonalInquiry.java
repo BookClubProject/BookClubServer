@@ -18,7 +18,7 @@ public class PersonalInquiry {
     private Long postId;
 
     @Column(nullable = false)
-    private String email;
+    private String writer;
 
     @Column(length = 500, nullable = false)
     private String title;
@@ -27,9 +27,9 @@ public class PersonalInquiry {
     private String content;
 
     @Builder
-    public PersonalInquiry (Long postId, String email, String title, String content) {
+    public PersonalInquiry (Long postId, String writer, String title, String content) {
         this.postId = postId;
-        this.email = email;
+        this.writer = writer;
         this.title = title;
         this.content = content;
     }
