@@ -11,23 +11,22 @@ import java.util.Map;
 public class OAuthAttributes {
     private Map<String, Object> attributes;
     private String nameAttributeKey;
-    private String nickname;
+    private String name;
     private String email;
     private String picture;
     private String mobile;
-    private String nickName;
     private String introduce;
     private Boolean reservationReminder;
     private Boolean alert;
 
     @Builder
     public OAuthAttributes(Map<String, Object> attributes,
-                           String nameAttributeKey, String nickname,
+                           String nameAttributeKey, String name,
                            String email, String picture, String mobile,
                            String introduce, Boolean reservationReminder, Boolean alert) {
         this.attributes = attributes;
         this.nameAttributeKey= nameAttributeKey;
-        this.nickname = nickname;
+        this.name = name;
         this.email = email;
         this.picture = picture;
         this.mobile = mobile;
@@ -53,7 +52,7 @@ public class OAuthAttributes {
         Map<String, Object> response = (Map<String, Object>) attributes.get("response");
 
         return OAuthAttributes.builder()
-                .nickname((String) response.get("name"))
+                .name((String) response.get("name"))
                 .email((String) response.get("email"))
                 .picture((String) response.get("profile_image"))
                 .attributes(response)
@@ -64,7 +63,7 @@ public class OAuthAttributes {
     private static OAuthAttributes ofGoogle(String userNameAttributeName,
                                             Map<String, Object> attributes) {
         return OAuthAttributes.builder()
-                .nickname((String) attributes.get("name"))
+                .name((String) attributes.get("name"))
                 .email((String) attributes.get("email"))
                 .picture((String) attributes.get("picture"))
                 .attributes(attributes)
@@ -75,7 +74,7 @@ public class OAuthAttributes {
 
     public User toEntity() {
         return User.builder()
-                .name(nickname)
+                .name(name)
                 .email(email)
                 .picture(picture)
                 .role(Role.USER) // 가입 후 최초 설정 - 일반 사용자로 함 (GUEST는 글 작성 불가능)

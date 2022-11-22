@@ -6,10 +6,10 @@ import lombok.*;
 
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class PostsSaveRequestDto {
+    private int participant;
     private User user;
     private String writer;
     private String bookImage;
@@ -29,12 +29,13 @@ public class PostsSaveRequestDto {
     private String content;
     private String author;
     @Builder
-    public PostsSaveRequestDto(User user, String writer, String bookImage, String bookTitle, String price,
+    public PostsSaveRequestDto(int participant, User user, String writer, String bookImage, String bookTitle, String price,
                                String publishDay, String publisher,
                                String year, String month, String date,
                                String day, String time, String state,
                                String location, String detailLocation, String theme,
                                String content, String author) {
+        this.participant = participant;
         this.user = user;
         this.writer = writer;
         this.bookImage = bookImage;
@@ -57,6 +58,7 @@ public class PostsSaveRequestDto {
 
     public Posts toEntity() {
         return Posts.builder()
+                .participant(participant)
                 .user(user)
                 .writer(writer)
                 .bookImage(bookImage)

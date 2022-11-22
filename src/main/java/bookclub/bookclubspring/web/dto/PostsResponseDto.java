@@ -7,6 +7,7 @@ import lombok.Getter;
 @Getter
 public class PostsResponseDto {
     private Long id;
+    private int participant;
     private User user;
     private String writer;
     private Long userId;
@@ -29,6 +30,7 @@ public class PostsResponseDto {
 
     public PostsResponseDto(Posts posts) {
         this.id =  posts.getId();
+        this.participant = posts.getParticipant();
         this.user = posts.getUser();
         this.userId = posts.getUser().getId();
         this.writer = posts.getWriter();

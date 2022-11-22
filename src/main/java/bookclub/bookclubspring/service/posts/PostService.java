@@ -22,8 +22,8 @@ public class PostService {
     private final UserRepository userRepository;
 
     @Transactional
-    public Long save(String nickName, PostsSaveRequestDto requestDto) {
-        User user = userRepository.findByNickName(nickName);
+    public Long save(String name, PostsSaveRequestDto requestDto) {
+        User user = userRepository.findByName(name);
         requestDto.setUser(user);
 
         Posts posts = requestDto.toEntity();

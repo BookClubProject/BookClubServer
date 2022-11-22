@@ -16,6 +16,9 @@ public class Posts extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
+    private int participant;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
@@ -71,12 +74,13 @@ public class Posts extends BaseTimeEntity {
 
 
     @Builder
-    public Posts(User user, String writer, String bookImage, String bookTitle, String price,
+    public Posts(int participant, User user, String writer, String bookImage, String bookTitle, String price,
                  String publishDay, String publisher,
                  String year, String month, String date,
                  String day, String time, String state,
                  String location, String detailLocation, String theme,
                  String content, String author)  {
+        this.participant = participant;
         this.user = user;
         this.writer = writer;
         this.bookImage = bookImage;

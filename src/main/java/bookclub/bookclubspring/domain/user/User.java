@@ -1,6 +1,7 @@
 package bookclub.bookclubspring.domain.user;
 
 import bookclub.bookclubspring.domain.posts.BaseTimeEntity;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,22 +18,22 @@ public class User extends BaseTimeEntity {
     private Long id;
 
     @Column(nullable = false)
-    private String nickname;
+    private String name;
 
     @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false)
+    @Column
     private String mobile;
 
-    @Column(nullable = false)
+    @Column
     private String introduce;
 
-    @Column(nullable = false)
-    private Boolean reservationReminder;
+    @Column
+    private Boolean reservationReminder = false;
 
-    @Column(nullable = false)
-    private Boolean alert;
+    @Column
+    private Boolean alert = false;
 
 
     @Column
@@ -43,9 +44,9 @@ public class User extends BaseTimeEntity {
     private Role role;
 
     @Builder
-    public User(String nickname, String email, String mobile, String introduce,
+    public User(String name, String email, String mobile, String introduce,
                 String picture, Boolean reservationReminder, Boolean alert, Role role) {
-        this.nickname = nickname;
+        this.name = name;
         this.email = email;
         this.mobile = mobile;
         this.introduce = introduce;
@@ -55,9 +56,9 @@ public class User extends BaseTimeEntity {
         this.role = role;
     }
 
-    public User update(String nickname, String picture, String mobile, String introduce,
+    public User update(String name, String picture, String mobile, String introduce,
                        Boolean reservationReminder, Boolean alert) {
-        this.nickname = nickname;
+        this.name = name;
         this.picture = picture;
         this.mobile = mobile;
         this.introduce = introduce;

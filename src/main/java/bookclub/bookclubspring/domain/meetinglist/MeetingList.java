@@ -1,5 +1,6 @@
 package bookclub.bookclubspring.domain.meetinglist;
 
+import bookclub.bookclubspring.domain.posts.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class MeetingList {
+public class MeetingList extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

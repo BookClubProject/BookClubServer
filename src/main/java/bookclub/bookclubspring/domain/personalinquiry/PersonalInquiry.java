@@ -1,5 +1,6 @@
 package bookclub.bookclubspring.domain.personalinquiry;
 
+import bookclub.bookclubspring.domain.posts.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class PersonalInquiry {
+public class PersonalInquiry extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,17 +27,22 @@ public class PersonalInquiry {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
+    @Column(nullable = false)
+    private Boolean isAnswer = false;
+
     @Builder
-    public PersonalInquiry (Long postId, String writer, String title, String content) {
+    public PersonalInquiry (Long postId, String writer, String title, String content, Boolean isAnswer) {
         this.postId = postId;
         this.writer = writer;
         this.title = title;
         this.content = content;
+        this.isAnswer = isAnswer;
     }
 
-    public void update (String title, String content) {
+    public void update (String title, String content, Boolean isAnswer) {
         this.title = title;
         this.content = content;
+        this.isAnswer = isAnswer;
     }
 
 }

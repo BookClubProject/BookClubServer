@@ -9,13 +9,15 @@ public class PersonalInquirySaveRequestDto {
     private String writer;
     private String title;
     private String content;
+    private Boolean isAnswer;
 
     @Builder
-    public PersonalInquirySaveRequestDto(Long postId, String writer, String title, String content) {
+    public PersonalInquirySaveRequestDto(Long postId, String writer, String title, String content, Boolean isAnswer) {
         this.postId = postId;
         this.writer = writer;
         this.title = title;
         this.content = content;
+        this.isAnswer = isAnswer;
     }
 
     public PersonalInquiry toEntity() {
@@ -24,6 +26,7 @@ public class PersonalInquirySaveRequestDto {
                 .writer(writer)
                 .title(title)
                 .content(content)
+                .isAnswer(isAnswer)
                 .build();
     }
 

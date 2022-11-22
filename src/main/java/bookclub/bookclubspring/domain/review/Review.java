@@ -1,5 +1,6 @@
 package bookclub.bookclubspring.domain.review;
 
+import bookclub.bookclubspring.domain.posts.BaseTimeEntity;
 import bookclub.bookclubspring.domain.registereduser.RegisteredUser;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Review {
+public class Review extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

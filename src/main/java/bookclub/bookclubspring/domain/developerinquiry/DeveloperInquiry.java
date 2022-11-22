@@ -1,5 +1,6 @@
 package bookclub.bookclubspring.domain.developerinquiry;
 
+import bookclub.bookclubspring.domain.posts.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class DeveloperInquiry {
+public class DeveloperInquiry extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

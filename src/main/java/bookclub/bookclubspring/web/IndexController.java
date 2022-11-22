@@ -22,7 +22,7 @@ public class IndexController {
         model.addAttribute("posts", postService.findAllDesc());
 
         if(user != null){
-            model.addAttribute("userName", user.getNickname());
+            model.addAttribute("userName", user.getName());
         }
 
         return "index";
@@ -47,7 +47,7 @@ public class IndexController {
         PostsResponseDto dto = postService.findById(id);
 
         if (user != null) {
-            model.addAttribute("user", user.getNickname());
+            model.addAttribute("user", user.getName());
 
             /*게시글 작성자 본인인지 확인*/
             if (dto.getUserId().equals(user.getId())) {

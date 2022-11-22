@@ -8,6 +8,7 @@ public class PersonalInquiryResponseDto {
     private String writer;
     private String title;
     private String content;
+    private Boolean isAnswer;
 
     public PersonalInquiryResponseDto(PersonalInquiry entity) {
         this.id = entity.getId();
@@ -15,5 +16,6 @@ public class PersonalInquiryResponseDto {
         this.writer = entity.getWriter();
         this.title = entity.getTitle();
         this.content = entity.getContent();
+        this.isAnswer = entity.getIsAnswer();
     }
 }
