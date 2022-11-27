@@ -19,8 +19,8 @@ public class DeveloperInquiryService {
     private final UserRepository userRepository;
 
     @Transactional
-    public Long save(String name, DeveloperInquirySaveRequestDto requestDto) {
-        User user = userRepository.findByName(name);
+    public Long save(String writer, DeveloperInquirySaveRequestDto requestDto) {
+        User user = userRepository.findByName(writer);
         requestDto.setUser(user);
 
         DeveloperInquiry developerInquiry = requestDto.toEntity();

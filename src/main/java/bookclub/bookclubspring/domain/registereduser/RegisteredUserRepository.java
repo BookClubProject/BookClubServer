@@ -10,6 +10,6 @@ import java.util.Optional;
 
 public interface RegisteredUserRepository extends JpaRepository<RegisteredUser, Long> {
 
-    @Query("SELECT p From PersonalInquiry p ORDER BY p.id DESC")
+    @Query("SELECT p From RegisteredUser p ORDER BY p.id DESC")
     List<RegisteredUser> findAllDesc();
 }

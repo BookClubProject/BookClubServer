@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 public class DeveloperInquiryController {
@@ -22,8 +24,8 @@ public class DeveloperInquiryController {
     @PostMapping("/api/v1/developerinquiry")
     public ResponseEntity save(DeveloperInquiry developerInquiry, User user, @RequestBody DeveloperInquirySaveRequestDto requestDto, @LoginUser SessionUser sessionUser) {
 
-        String email = sessionUser.getEmail();
-        return ResponseEntity.ok(developerInquiryService.save(email, requestDto));
+        String writer = sessionUser.getName();
+        return ResponseEntity.ok(developerInquiryService.save(writer, requestDto));
     }
 
     @PutMapping("/api/v1/developerinquiry/{id}")
@@ -37,6 +39,12 @@ public class DeveloperInquiryController {
     public DeveloperInquiryResponseDto findById (@PathVariable Long id) {
 
         return developerInquiryService.findById(id);
+    }
+
+    @GetMapping("/api/v1/developerinquiry/read")
+    public List<DeveloperInquiryListDto> findAllDesc () {
+
+        return developerInquiryService.findAllDesc();
     }
 
     @DeleteMapping("/api/v1/developerinquiry/{id}")

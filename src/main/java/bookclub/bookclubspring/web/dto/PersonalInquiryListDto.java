@@ -2,7 +2,9 @@ package bookclub.bookclubspring.web.dto;
 
 import bookclub.bookclubspring.domain.personalinquiry.PersonalInquiry;
 import bookclub.bookclubspring.domain.user.User;
+import lombok.Getter;
 
+@Getter
 public class PersonalInquiryListDto {
     private Long id;
     private Long postId;

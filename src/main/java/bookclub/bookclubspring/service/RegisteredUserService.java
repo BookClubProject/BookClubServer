@@ -49,6 +49,13 @@ public class RegisteredUserService {
         return new RegisteredUserResponseDto(entity);
     }
 
+    @Transactional(readOnly = true)
+    public List<RegisteredUserListResponseDto> findAllDesc() {
+        return registeredUserRepository.findAllDesc().stream()
+                .map(RegisteredUserListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
     @Transactional
     public void delete (Long id) {
         RegisteredUser registeredUser = registeredUserRepository.findById(id)

@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 public class RegisteredUserController {
@@ -28,6 +30,12 @@ public class RegisteredUserController {
     RegisteredUserUpdateRequestDto requestDto) {
 
         return registeredUserService.update(id, requestDto);
+    }
+
+    @GetMapping("/api/v1/onlyuser/read")
+    public List<RegisteredUserListResponseDto> findAllDesc () {
+
+        return registeredUserService.findAllDesc();
     }
 
     @GetMapping("/api/v1/onlyuser/{id}")

@@ -18,9 +18,9 @@ public class MeetingList extends BaseTimeEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(foreignKey = @ForeignKey(name = "writer"))
+    @JoinColumn(foreignKey = @ForeignKey(name = "name"))
     private User user;
-    //private String writer;
+    //private String name;
 
     @Column()
     private Long postId;

@@ -11,6 +11,9 @@ import bookclub.bookclubspring.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 public class MeetingListController {
@@ -20,8 +23,8 @@ public class MeetingListController {
     @PostMapping("/api/v1/posts/meetinglist")
     public ResponseEntity save(MeetingList meetingList, User user, @RequestBody MeetingListSaveRequestDto requestDto, @LoginUser SessionUser sessionUser) {
 
-        String email = sessionUser.getEmail();
-        return ResponseEntity.ok(meetingListService.save(email, requestDto));
+        String name = sessionUser.getName();
+        return ResponseEntity.ok(meetingListService.save(name, requestDto));
     }
 
     @PutMapping("/api/v1/posts/meetinglist/{id}")
@@ -35,6 +38,12 @@ public class MeetingListController {
     public MeetingListResponseDto findById (@PathVariable Long id) {
 
         return meetingListService.findById(id);
+    }
+
+    @GetMapping("/api/v1/posts/meetinglist/read")
+    public List<MeetingListAllDto> findAllDesc () {
+
+        return meetingListService.findAllDesc();
     }
 
     @DeleteMapping("/api/v1/posts/meetinglist/{id}")

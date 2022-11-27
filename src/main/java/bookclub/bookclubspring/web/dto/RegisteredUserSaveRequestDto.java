@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@Builder
+
 public class RegisteredUserSaveRequestDto {
     private String mobile;
     private User user;

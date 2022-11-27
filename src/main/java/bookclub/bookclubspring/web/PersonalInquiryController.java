@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 public class PersonalInquiryController {
@@ -36,6 +38,11 @@ public class PersonalInquiryController {
     public PersonalInquiryResponseDto findById (@PathVariable Long id) {
 
         return personalInquiryService.findById(id);
+    }
+    @GetMapping("/api/v1/posts/personalinquiry/read")
+    public List<PersonalInquiryListDto> findAllDesc () {
+
+        return personalInquiryService.findAllDesc();
     }
 
     @DeleteMapping("/api/v1/posts/personalinquiry/{id}")

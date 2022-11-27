@@ -2,7 +2,9 @@ package bookclub.bookclubspring.web.dto;
 
 import bookclub.bookclubspring.domain.meetinglist.MeetingList;
 import bookclub.bookclubspring.domain.user.User;
+import lombok.Getter;
 
+@Getter
 public class MeetingListAllDto {
     private Long id;
     private Long postId;

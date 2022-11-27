@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 public class ReviewController {
@@ -35,6 +37,11 @@ public class ReviewController {
     public ReviewResponseDto findById (@PathVariable Long id) {
 
         return reviewService.findById(id);
+    }
+    @GetMapping("/api/v1/reviews/read")
+    public List<ReviewListResponseDto> findAllDesc () {
+
+        return reviewService.findAllDesc();
     }
 
     @DeleteMapping("/api/v1/reviews/{id}")
