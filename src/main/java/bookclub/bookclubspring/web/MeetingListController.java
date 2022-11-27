@@ -17,27 +17,27 @@ public class MeetingListController {
     private final MeetingListService meetingListService;
 
     /* CREATE */
-    @PostMapping("/api/v1/meetinglist")
+    @PostMapping("/api/v1/posts/meetinglist")
     public ResponseEntity save(MeetingList meetingList, User user, @RequestBody MeetingListSaveRequestDto requestDto, @LoginUser SessionUser sessionUser) {
 
         String email = sessionUser.getEmail();
         return ResponseEntity.ok(meetingListService.save(email, requestDto));
     }
 
-    @PutMapping("/api/v1/meetinglist/{id}")
+    @PutMapping("/api/v1/posts/meetinglist/{id}")
     public Long update(@PathVariable Long id, @RequestBody
     MeetingListUpdateRequestDto requestDto) {
 
         return meetingListService.update(id, requestDto);
     }
 
-    @GetMapping("/api/v1/meetinglist/{id}")
+    @GetMapping("/api/v1/posts/meetinglist/{id}")
     public MeetingListResponseDto findById (@PathVariable Long id) {
 
         return meetingListService.findById(id);
     }
 
-    @DeleteMapping("/api/v1/meetinglist/{id}")
+    @DeleteMapping("/api/v1/posts/meetinglist/{id}")
     public Long delete(@PathVariable Long id) {
         meetingListService.delete(id);
         return id;

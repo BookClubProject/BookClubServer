@@ -18,19 +18,12 @@ public class Review extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private Long postId;
-
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "writer")
     private User user;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "post_id")
-    private Posts posts;
-
-    @Column(nullable = false)
-    private String writer;
+    @Column()
+    private Long postId;
 
     @Column(length = 500, nullable = false)
     private String title;
@@ -39,11 +32,9 @@ public class Review extends BaseTimeEntity {
     private String content;
 
     @Builder
-    public Review(Long postId, Posts posts, User user, String writer, String title, String content) {
+    public Review(Long postId, User user, String title, String content) {
         this.postId = postId;
-        this.posts = posts;
         this.user = user;
-        this.writer = writer;
         this.title = title;
         this.content = content;
     }

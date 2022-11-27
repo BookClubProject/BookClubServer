@@ -4,6 +4,7 @@ import bookclub.bookclubspring.domain.developerinquiry.DeveloperInquiry;
 import bookclub.bookclubspring.domain.developerinquiry.DeveloperInquiryRepository;
 import bookclub.bookclubspring.domain.meetinglist.MeetingList;
 import bookclub.bookclubspring.domain.meetinglist.MeetingListRepository;
+import bookclub.bookclubspring.domain.review.Review;
 import bookclub.bookclubspring.domain.user.User;
 import bookclub.bookclubspring.domain.user.UserRepository;
 import bookclub.bookclubspring.web.dto.*;
@@ -21,7 +22,13 @@ public class MeetingListService {
 
     @Transactional
     public Long save(String name, MeetingListSaveRequestDto requestDto) {
-        return meetingListRepository.save(requestDto.toEntity()).getId();
+        User user = userRepository.findByName(name);
+        requestDto.setUser(user);
+
+        MeetingList meetingList = requestDto.toEntity();
+        meetingListRepository.save(meetingList);
+
+        return meetingList.getId();
     }
 
     @Transactional
@@ -38,6 +45,13 @@ public class MeetingListService {
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 신청 내역입니다. id="+ id));
 
         return new MeetingListResponseDto(entity);
+    }
+
+    @Transactional(readOnly = true)
+    public List<MeetingListAllDto> findAllDesc() {
+        return meetingListRepository.findAllDesc().stream()
+                .map(MeetingListAllDto::new)
+                .collect(Collectors.toList());
     }
 
     @Transactional

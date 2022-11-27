@@ -1,19 +1,16 @@
 package bookclub.bookclubspring.web.dto;
 
 import bookclub.bookclubspring.domain.developerinquiry.DeveloperInquiry;
-import bookclub.bookclubspring.domain.personalinquiry.PersonalInquiry;
 import bookclub.bookclubspring.domain.user.User;
-import lombok.Getter;
 
-@Getter
-public class DeveloperInquiryResponseDto {
+public class DeveloperInquiryListDto {
     private Long id;
     private User user;
     private String writer;
     private String title;
     private String content;
 
-    public DeveloperInquiryResponseDto(DeveloperInquiry developerInquiry) {
+    public DeveloperInquiryListDto(DeveloperInquiry developerInquiry) {
         this.id = developerInquiry.getId();
         this.user = developerInquiry.getUser();
         this.writer = developerInquiry.getUser().getName();

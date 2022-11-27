@@ -17,12 +17,10 @@ public class DeveloperInquiry extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(foreignKey = @ForeignKey(name = "writer"))
     private User user;
-
-    @Column(nullable = false)
-    private String email;
+    //private String writer;
 
     @Column(length = 500, nullable = false)
     private String title;
@@ -31,9 +29,8 @@ public class DeveloperInquiry extends BaseTimeEntity {
     private String content;
 
     @Builder
-    public DeveloperInquiry (User user, String email, String title, String content) {
+    public DeveloperInquiry (User user, String title, String content) {
         this.user = user;
-        this.email = email;
         this.title = title;
         this.content = content;
     }

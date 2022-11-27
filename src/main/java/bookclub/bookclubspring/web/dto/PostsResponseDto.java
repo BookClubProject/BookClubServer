@@ -10,7 +10,6 @@ public class PostsResponseDto {
     private int participant;
     private User user;
     private String writer;
-    private Long userId;
     private String bookImage;
     private String bookTitle;
     private String price;
@@ -32,7 +31,6 @@ public class PostsResponseDto {
         this.id =  posts.getId();
         this.participant = posts.getParticipant();
         this.user = posts.getUser();
-        this.userId = posts.getUser().getId();
         this.writer = posts.getUser().getName();
         this.bookImage = posts.getBookImage();
         this.bookTitle = posts.getBookTitle();

@@ -17,19 +17,13 @@ public class PersonalInquiry extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private Long postId;
-
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(foreignKey = @ForeignKey(name = "writer"))
     private User user;
+    //private String writer;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "post_id")
-    private Posts posts;
-
-    @Column(nullable = false)
-    private String writer;
+    @Column()
+    private Long postId;
 
     @Column(length = 500, nullable = false)
     private String title;
@@ -41,11 +35,9 @@ public class PersonalInquiry extends BaseTimeEntity {
     private Boolean isAnswer = false;
 
     @Builder
-    public PersonalInquiry (Long postId, Posts posts, User user, String writer, String title, String content, Boolean isAnswer) {
+    public PersonalInquiry (Long postId, User user, String title, String content, Boolean isAnswer) {
         this.postId = postId;
-        this.posts = posts;
         this.user = user;
-        this.writer = writer;
         this.title = title;
         this.content = content;
         this.isAnswer = isAnswer;

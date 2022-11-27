@@ -16,37 +16,35 @@ public class RegisteredUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String email;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(foreignKey = @ForeignKey(name = "name"))
+    private User user;
+    //private String name;
 
     @Column(nullable = false)
     private String mobile;
 
     @Column(nullable = false)
-    private String nickName;
-
-    @Column(nullable = false)
     private String introduce;
 
     @Column(nullable = false)
-    private Boolean reservationReminder;
+    private Boolean reservationReminder = false;
 
     @Column(nullable = false)
-    private Boolean alert;
+    private Boolean alert = false;
 
     @Builder
-    public RegisteredUser(String email, String mobile, String nickName, String introduce, Boolean reservationReminder, Boolean alert) {
-        this.email = email;
+    public RegisteredUser(User user, String mobile, String introduce, Boolean reservationReminder, Boolean alert) {
+        this.user = user;
         this.mobile = mobile;
-        this.nickName = nickName;
         this.introduce = introduce;
         this.reservationReminder = reservationReminder;
         this.alert = alert;
     }
 
-    public RegisteredUser update(String mobile, String nickName, String introduce, Boolean reservationReminder, Boolean alert) {
+    public RegisteredUser update(User user, String mobile, String introduce, Boolean reservationReminder, Boolean alert) {
+        this.user = user;
         this.mobile = mobile;
-        this.nickName = nickName;
         this.introduce = introduce;
         this.reservationReminder = reservationReminder;
         this.alert = alert;

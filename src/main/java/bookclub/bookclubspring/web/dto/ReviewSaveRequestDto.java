@@ -1,5 +1,6 @@
 package bookclub.bookclubspring.web.dto;
 
+import bookclub.bookclubspring.domain.posts.Posts;
 import bookclub.bookclubspring.domain.review.Review;
 import bookclub.bookclubspring.domain.user.User;
 import lombok.Builder;
@@ -10,26 +11,23 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class ReviewSaveRequestDto {
-
-    private Long postId;
     private User user;
-    private String writer;
+    private Long postId;
     private String title;
     private String content;
 
     @Builder
-    public ReviewSaveRequestDto(Long postId, User user, String writer, String title, String content) {
-        this.postId = postId;
+    public ReviewSaveRequestDto(User user, Long postId, String title, String content) {
         this.user = user;
-        this.writer = writer;
+        this.postId = postId;
         this.title = title;
         this.content = content;
     }
 
     public Review toEntity() {
         return Review.builder()
+                .user(user)
                 .postId(postId)
-                .writer(writer)
                 .title(title)
                 .content(content)
                 .build();

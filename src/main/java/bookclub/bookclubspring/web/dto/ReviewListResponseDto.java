@@ -9,7 +9,6 @@ import lombok.Getter;
 public class ReviewListResponseDto {
     private Long id;
     private Long postId;
-    private Posts posts;
     private User user;
     private String writer;
     private String title;
@@ -17,10 +16,9 @@ public class ReviewListResponseDto {
 
     public ReviewListResponseDto(Review entity) {
         this.id = entity.getId();
-        this.postId = entity.getPosts().getId();
-        this.posts = entity.getPosts();
+        this.postId = entity.getPostId();
         this.user = entity.getUser();
-        this.writer = entity.getWriter();
+        this.writer = entity.getUser().getName();
         this.title = entity.getTitle();
         this.content = entity.getContent();
     }

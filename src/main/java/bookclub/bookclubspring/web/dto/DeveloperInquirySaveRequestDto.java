@@ -11,14 +11,12 @@ import lombok.NoArgsConstructor;
 @Builder
 public class DeveloperInquirySaveRequestDto {
     private User user;
-    private String email;
     private String title;
     private String content;
 
     @Builder
-    public DeveloperInquirySaveRequestDto(User user, String email, String title, String content) {
+    public DeveloperInquirySaveRequestDto(User user, String title, String content) {
         this.user = user;
-        this.email = email;
         this.title = title;
         this.content = content;
     }
@@ -26,7 +24,6 @@ public class DeveloperInquirySaveRequestDto {
     public DeveloperInquiry toEntity() {
         return DeveloperInquiry.builder()
                 .user(user)
-                .email(email)
                 .title(title)
                 .content(content)
                 .build();

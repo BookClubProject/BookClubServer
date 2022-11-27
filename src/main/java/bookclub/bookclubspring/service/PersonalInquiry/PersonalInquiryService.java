@@ -44,6 +44,13 @@ public class PersonalInquiryService {
         return new PersonalInquiryResponseDto(entity);
     }
 
+    @Transactional(readOnly = true)
+    public List<PersonalInquiryListDto> findAllDesc() {
+        return personalInquiryRepository.findAllDesc().stream()
+                .map(PersonalInquiryListDto::new)
+                .collect(Collectors.toList());
+    }
+
     @Transactional
     public void delete (Long id) {
         PersonalInquiry personalInquiry = personalInquiryRepository.findById(id)

@@ -11,7 +11,6 @@ import lombok.*;
 public class PostsSaveRequestDto {
     private int participant;
     private User user;
-    private String writer;
     private String bookImage;
     private String bookTitle;
     private String price;
@@ -29,7 +28,7 @@ public class PostsSaveRequestDto {
     private String content;
     private String author;
     @Builder
-    public PostsSaveRequestDto(int participant, User user, String writer, String bookImage, String bookTitle, String price,
+    public PostsSaveRequestDto(int participant, User user, String bookImage, String bookTitle, String price,
                                String publishDay, String publisher,
                                String year, String month, String date,
                                String day, String time, String state,
@@ -37,7 +36,6 @@ public class PostsSaveRequestDto {
                                String content, String author) {
         this.participant = participant;
         this.user = user;
-        this.writer = writer;
         this.bookImage = bookImage;
         this.bookTitle = bookTitle;
         this.price = price;
@@ -60,7 +58,6 @@ public class PostsSaveRequestDto {
         return Posts.builder()
                 .participant(participant)
                 .user(user)
-                .writer(writer)
                 .bookImage(bookImage)
                 .bookTitle(bookTitle)
                 .price(price)

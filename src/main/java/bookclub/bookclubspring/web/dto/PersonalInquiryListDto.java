@@ -1,12 +1,9 @@
 package bookclub.bookclubspring.web.dto;
 
 import bookclub.bookclubspring.domain.personalinquiry.PersonalInquiry;
-import bookclub.bookclubspring.domain.posts.Posts;
 import bookclub.bookclubspring.domain.user.User;
-import lombok.Getter;
 
-@Getter
-public class PersonalInquiryResponseDto {
+public class PersonalInquiryListDto {
     private Long id;
     private Long postId;
     private User user;
@@ -15,7 +12,7 @@ public class PersonalInquiryResponseDto {
     private String content;
     private Boolean isAnswer;
 
-    public PersonalInquiryResponseDto(PersonalInquiry entity) {
+    public PersonalInquiryListDto(PersonalInquiry entity) {
         this.id = entity.getId();
         this.postId = entity.getPostId();
         this.user = entity.getUser();

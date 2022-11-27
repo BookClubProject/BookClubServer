@@ -20,11 +20,9 @@ public class Posts extends BaseTimeEntity {
     private int participant;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(foreignKey = @ForeignKey(name = "writer"))
     private User user;
-
-    @Column(nullable = false)
-    private String writer;
+    //private String writer;
 
     @Column(nullable = false)
     private String bookImage;
@@ -74,7 +72,7 @@ public class Posts extends BaseTimeEntity {
 
 
     @Builder
-    public Posts(int participant, User user, String writer, String bookImage, String bookTitle, String price,
+    public Posts(int participant, User user, String bookImage, String bookTitle, String price,
                  String publishDay, String publisher,
                  String year, String month, String date,
                  String day, String time, String state,
@@ -82,7 +80,6 @@ public class Posts extends BaseTimeEntity {
                  String content, String author)  {
         this.participant = participant;
         this.user = user;
-        this.writer = writer;
         this.bookImage = bookImage;
         this.bookTitle = bookTitle;
         this.price = price;

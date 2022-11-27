@@ -13,16 +13,14 @@ import lombok.NoArgsConstructor;
 public class PersonalInquirySaveRequestDto {
     private Long postId;
     private User user;
-    private String writer;
     private String title;
     private String content;
     private Boolean isAnswer;
 
     @Builder
-    public PersonalInquirySaveRequestDto(Long postId, User user, String writer, String title, String content, Boolean isAnswer) {
+    public PersonalInquirySaveRequestDto(Long postId, User user, String title, String content, Boolean isAnswer) {
         this.postId = postId;
         this.user = user;
-        this.writer = writer;
         this.title = title;
         this.content = content;
         this.isAnswer = isAnswer;
@@ -30,8 +28,8 @@ public class PersonalInquirySaveRequestDto {
 
     public PersonalInquiry toEntity() {
         return PersonalInquiry.builder()
+                .user(user)
                 .postId(postId)
-                .writer(writer)
                 .title(title)
                 .content(content)
                 .isAnswer(isAnswer)

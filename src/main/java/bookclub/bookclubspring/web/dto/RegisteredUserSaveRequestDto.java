@@ -1,20 +1,27 @@
 package bookclub.bookclubspring.web.dto;
 
 import bookclub.bookclubspring.domain.registereduser.RegisteredUser;
+import bookclub.bookclubspring.domain.user.User;
 
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@Builder
 public class RegisteredUserSaveRequestDto {
-    private String email;
     private String mobile;
-    private String nickName;
+    private User user;
     private String introduce;
     private Boolean reservationReminder;
     private Boolean alert;
 
-    public RegisteredUserSaveRequestDto(String email, String mobile, String nickName, String introduce,
+    @Builder
+    public RegisteredUserSaveRequestDto(User user, String mobile, String introduce,
                                         Boolean reservationReminder, Boolean alert) {
-        this.email = email;
+        this.user = user;
         this.mobile = mobile;
-        this.nickName = nickName;
         this.introduce = introduce;
         this.reservationReminder = reservationReminder;
         this.alert = alert;
@@ -22,9 +29,8 @@ public class RegisteredUserSaveRequestDto {
 
     public RegisteredUser toEntity() {
         return RegisteredUser.builder()
-                .email(email)
+                .user(user)
                 .mobile(mobile)
-                .nickName(nickName)
                 .introduce(introduce)
                 .reservationReminder(reservationReminder)
                 .alert(alert)
