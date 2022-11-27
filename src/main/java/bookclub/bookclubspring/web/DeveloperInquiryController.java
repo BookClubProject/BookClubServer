@@ -22,8 +22,8 @@ public class DeveloperInquiryController {
     @PostMapping("/api/v1/developerinquiry")
     public ResponseEntity save(DeveloperInquiry developerInquiry, User user, @RequestBody DeveloperInquirySaveRequestDto requestDto, @LoginUser SessionUser sessionUser) {
 
-        String writer = sessionUser.getName();
-        return ResponseEntity.ok(developerInquiryService.save(writer, requestDto));
+        String email = sessionUser.getEmail();
+        return ResponseEntity.ok(developerInquiryService.save(email, requestDto));
     }
 
     @PutMapping("/api/v1/developerinquiry/{id}")

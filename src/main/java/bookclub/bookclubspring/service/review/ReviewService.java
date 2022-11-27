@@ -5,11 +5,14 @@ import bookclub.bookclubspring.domain.review.ReviewRepository;
 import bookclub.bookclubspring.domain.user.User;
 import bookclub.bookclubspring.domain.user.UserRepository;
 import bookclub.bookclubspring.web.dto.*;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
+@RequiredArgsConstructor
+@Service
 public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final UserRepository userRepository;
@@ -42,9 +45,9 @@ public class ReviewService {
     }
 
     @Transactional(readOnly = true)
-    public List<PostsListResponseDto> findAllDesc() {
+    public List<ReviewListResponseDto> findAllDesc() {
         return reviewRepository.findAllDesc().stream()
-                .map(PostsListResponseDto::new)
+                .map(ReviewListResponseDto::new)
                 .collect(Collectors.toList());
     }
 

@@ -2,6 +2,7 @@ package bookclub.bookclubspring.domain.review;
 
 import bookclub.bookclubspring.domain.posts.BaseTimeEntity;
 import bookclub.bookclubspring.domain.registereduser.RegisteredUser;
+import bookclub.bookclubspring.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,10 @@ public class Review extends BaseTimeEntity {
 
     @Column(nullable = false)
     private Long postId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Column(nullable = false)
     private String writer;
@@ -36,8 +41,7 @@ public class Review extends BaseTimeEntity {
         this.content = content;
     }
 
-    public void update(String writer, String title, String content) {
-        this.writer = writer;
+    public void update(String title, String content) {
         this.title = title;
         this.content = content;
     }

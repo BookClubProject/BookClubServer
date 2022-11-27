@@ -7,24 +7,21 @@ import bookclub.bookclubspring.domain.meetinglist.MeetingListRepository;
 import bookclub.bookclubspring.domain.user.User;
 import bookclub.bookclubspring.domain.user.UserRepository;
 import bookclub.bookclubspring.web.dto.*;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
+@RequiredArgsConstructor
+@Service
 public class MeetingListService {
     private final MeetingListRepository meetingListRepository;
     private final UserRepository userRepository;
 
     @Transactional
     public Long save(String name, MeetingListSaveRequestDto requestDto) {
-        User user = userRepository.findByName(name);
-        requestDto.setUser(user);
-
-        MeetingList meetingList = requestDto.toEntity();
-        meetingListRepository.save(meetingList);
-
-        return meetingList.getId();
+        return meetingListRepository.save(requestDto.toEntity()).getId();
     }
 
     @Transactional
@@ -32,22 +29,15 @@ public class MeetingListService {
         MeetingList meetingList = meetingListRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 신청 내역입니다. id="+ id));
 
-        meetingListRepository.update(requestDto.getTitle(), requestDto.getContent());
+        meetingList.update(requestDto.getRegister());
         return id;
     }
 
     public MeetingListResponseDto findById (Long id) {
-        DeveloperInquiry entity = meetingListRepository.findById(id)
+        MeetingList entity = meetingListRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 신청 내역입니다. id="+ id));
 
         return new MeetingListResponseDto(entity);
-    }
-
-    @Transactional(readOnly = true)
-    public List<PostsListResponseDto> findAllDesc() {
-        return meetingListRepository.findAllDesc().stream()
-                .map(PostsListResponseDto::new)
-                .collect(Collectors.toList());
     }
 
     @Transactional

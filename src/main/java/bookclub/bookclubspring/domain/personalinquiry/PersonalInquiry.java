@@ -1,6 +1,7 @@
 package bookclub.bookclubspring.domain.personalinquiry;
 
 import bookclub.bookclubspring.domain.posts.BaseTimeEntity;
+import bookclub.bookclubspring.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,10 @@ public class PersonalInquiry extends BaseTimeEntity {
 
     @Column(nullable = false)
     private Long postId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Column(nullable = false)
     private String writer;

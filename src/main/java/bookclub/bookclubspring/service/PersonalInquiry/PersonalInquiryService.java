@@ -5,11 +5,14 @@ import bookclub.bookclubspring.domain.personalinquiry.PersonalInquiryRepository;
 import bookclub.bookclubspring.domain.user.User;
 import bookclub.bookclubspring.domain.user.UserRepository;
 import bookclub.bookclubspring.web.dto.*;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
+@RequiredArgsConstructor
+@Service
 public class PersonalInquiryService {
     private final PersonalInquiryRepository personalInquiryRepository;
     private final UserRepository userRepository;
@@ -22,15 +25,15 @@ public class PersonalInquiryService {
         PersonalInquiry personalInquiry = requestDto.toEntity();
         personalInquiryRepository.save(personalInquiry);
 
-        return review.getId();
+        return personalInquiry.getId();
     }
 
     @Transactional
-    public Long update(Long id, ReviewUpdateRequestDto requestDto) {
+    public Long update(Long id, PersonalInquiryUpdateRequestDto requestDto) {
         PersonalInquiry personalInquiry = personalInquiryRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 문의가 존재하지 않습니다. id="+ id));
 
-        personalInquiry.update(requestDto.getTitle(), requestDto.getContent());
+        personalInquiry.update(requestDto.getTitle(), requestDto.getContent(), requestDto.getIsAnswer());
         return id;
     }
 
@@ -38,14 +41,7 @@ public class PersonalInquiryService {
         PersonalInquiry entity = personalInquiryRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 문의가 존재하지 않습니다. id="+ id));
 
-        return new ReviewResponseDto(entity);
-    }
-
-    @Transactional(readOnly = true)
-    public List<PostsListResponseDto> findAllDesc() {
-        return personalInquiryRepository.findAllDesc().stream()
-                .map(PostsListResponseDto::new)
-                .collect(Collectors.toList());
+        return new PersonalInquiryResponseDto(entity);
     }
 
     @Transactional

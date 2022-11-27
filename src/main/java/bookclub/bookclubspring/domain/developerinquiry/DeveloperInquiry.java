@@ -1,6 +1,7 @@
 package bookclub.bookclubspring.domain.developerinquiry;
 
 import bookclub.bookclubspring.domain.posts.BaseTimeEntity;
+import bookclub.bookclubspring.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,10 @@ public class DeveloperInquiry extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @Column(nullable = false)
     private String email;
 
@@ -26,7 +31,8 @@ public class DeveloperInquiry extends BaseTimeEntity {
     private String content;
 
     @Builder
-    public DeveloperInquiry (String email, String title, String content) {
+    public DeveloperInquiry (User user, String email, String title, String content) {
+        this.user = user;
         this.email = email;
         this.title = title;
         this.content = content;

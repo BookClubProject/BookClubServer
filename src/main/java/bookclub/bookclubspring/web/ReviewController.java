@@ -3,6 +3,7 @@ package bookclub.bookclubspring.web;
 import bookclub.bookclubspring.config.auth.LoginUser;
 import bookclub.bookclubspring.config.auth.dto.SessionUser;
 import bookclub.bookclubspring.domain.posts.Posts;
+import bookclub.bookclubspring.domain.review.Review;
 import bookclub.bookclubspring.domain.user.User;
 import bookclub.bookclubspring.service.review.ReviewService;
 import bookclub.bookclubspring.web.dto.*;
@@ -17,7 +18,7 @@ public class ReviewController {
 
     /* CREATE */
     @PostMapping("/api/v1/reviews")
-    public ResponseEntity save(Posts posts, User user, @RequestBody ReviewSaveRequestDto requestDto, @LoginUser SessionUser sessionUser) {
+    public ResponseEntity save(Review review, User user, @RequestBody ReviewSaveRequestDto requestDto, @LoginUser SessionUser sessionUser) {
 
         String writer = sessionUser.getName();
         return ResponseEntity.ok(reviewService.save(writer, requestDto));

@@ -1,6 +1,7 @@
 package bookclub.bookclubspring.domain.meetinglist;
 
 import bookclub.bookclubspring.domain.posts.BaseTimeEntity;
+import bookclub.bookclubspring.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,10 @@ public class MeetingList extends BaseTimeEntity {
     @Column(nullable = false)
     private Long postId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @Column(nullable = false)
     private String email;
 
@@ -25,8 +30,9 @@ public class MeetingList extends BaseTimeEntity {
     private Boolean register;
 
     @Builder
-    public MeetingList (Long postId, String email, Boolean register) {
+    public MeetingList (Long postId, User user, String email, Boolean register) {
         this.postId = postId;
+        this.user = user;
         this.email = email;
         this.register = register;
     }
