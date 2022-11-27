@@ -7,6 +7,7 @@ import bookclub.bookclubspring.service.posts.PostService;
 import bookclub.bookclubspring.web.dto.PostsResponseDto;
 import bookclub.bookclubspring.web.dto.PostsSaveRequestDto;
 import bookclub.bookclubspring.web.dto.PostsUpdateRequestDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
