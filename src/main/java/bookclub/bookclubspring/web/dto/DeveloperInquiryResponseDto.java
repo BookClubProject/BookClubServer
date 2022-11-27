@@ -16,7 +16,7 @@ public class DeveloperInquiryResponseDto {
     public DeveloperInquiryResponseDto(DeveloperInquiry entity) {
         this.id = entity.getId();
         this.user = entity.getUser();
-        this.email = entity.getEmail();
+        this.email = entity.getUser().getEmail();
         this.title = entity.getTitle();
         this.content = entity.getContent();
     }

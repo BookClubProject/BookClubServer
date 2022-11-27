@@ -31,7 +31,7 @@ public class PostsListResponseDto {
     public PostsListResponseDto(Posts entity) {
         this.id = entity.getId();
         this.user = entity.getUser();
-        this.writer = entity.getWriter();
+        this.writer = entity.getUser().getName();
         this.bookImage = entity.getBookImage();
         this.bookTitle = entity.getBookTitle();
         this.price = entity.getPrice();

@@ -17,27 +17,27 @@ public class ReviewController {
     private final ReviewService reviewService;
 
     /* CREATE */
-    @PostMapping("/api/v1/reviews")
+    @PostMapping("/api/v1/posts/{postId}/reviews")
     public ResponseEntity save(Review review, User user, @RequestBody ReviewSaveRequestDto requestDto, @LoginUser SessionUser sessionUser) {
 
         String writer = sessionUser.getName();
         return ResponseEntity.ok(reviewService.save(writer, requestDto));
     }
 
-    @PutMapping("/api/v1/reviews/{id}")
+    @PutMapping("/api/v1/posts/{postId}/reviews/{id}")
     public Long update(@PathVariable Long id, @RequestBody
     ReviewUpdateRequestDto requestDto) {
 
         return reviewService.update(id, requestDto);
     }
 
-    @GetMapping("/api/v1/reviews/{id}")
+    @GetMapping("/api/v1/posts/{postId}/reviews/{id}")
     public ReviewResponseDto findById (@PathVariable Long id) {
 
         return reviewService.findById(id);
     }
 
-    @DeleteMapping("/api/v1/reviews/{id}")
+    @DeleteMapping("/api/v1/posts/{postId}/reviews/{id}")
     public Long delete(@PathVariable Long id) {
         reviewService.delete(id);
         return id;

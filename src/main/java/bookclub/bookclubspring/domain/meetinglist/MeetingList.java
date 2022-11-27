@@ -1,6 +1,7 @@
 package bookclub.bookclubspring.domain.meetinglist;
 
 import bookclub.bookclubspring.domain.posts.BaseTimeEntity;
+import bookclub.bookclubspring.domain.posts.Posts;
 import bookclub.bookclubspring.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,9 +20,13 @@ public class MeetingList extends BaseTimeEntity {
     @Column(nullable = false)
     private Long postId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "post_id")
+    private Posts posts;
 
     @Column(nullable = false)
     private String email;
@@ -30,8 +35,9 @@ public class MeetingList extends BaseTimeEntity {
     private Boolean register;
 
     @Builder
-    public MeetingList (Long postId, User user, String email, Boolean register) {
+    public MeetingList (Long postId, Posts posts, User user, String email, Boolean register) {
         this.postId = postId;
+        this.posts = posts;
         this.user = user;
         this.email = email;
         this.register = register;

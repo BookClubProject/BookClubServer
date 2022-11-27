@@ -1,5 +1,6 @@
 package bookclub.bookclubspring.web.dto;
 
+import bookclub.bookclubspring.domain.posts.Posts;
 import bookclub.bookclubspring.domain.review.Review;
 import bookclub.bookclubspring.domain.user.User;
 import lombok.Getter;
@@ -9,16 +10,20 @@ public class ReviewResponseDto {
     private Long id;
     private Long postId;
     private User user;
+    private Long userId;
+    private Posts posts;
     private String writer;
     private String title;
     private String content;
 
-    public ReviewResponseDto(Review entity) {
-        this.id = entity.getId();
-        this.postId = entity.getPostId();
-        this.user = entity.getUser();
-        this.writer = entity.getWriter();
-        this.title = entity.getTitle();
-        this.content = entity.getContent();
+    public ReviewResponseDto(Review review) {
+        this.id = review.getId();
+        this.postId = review.getPosts().getId();
+        this.posts = review.getPosts();
+        this.user = review.getUser();
+        this.userId = review.getUser().getId();
+        this.writer = review.getUser().getName();
+        this.title = review.getTitle();
+        this.content = review.getContent();
     }
 }
