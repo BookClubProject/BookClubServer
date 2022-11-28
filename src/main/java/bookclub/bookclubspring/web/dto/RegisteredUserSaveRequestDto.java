@@ -1,25 +1,24 @@
 package bookclub.bookclubspring.web.dto;
 
+import bookclub.bookclubspring.domain.developerinquiry.DeveloperInquiry;
 import bookclub.bookclubspring.domain.registereduser.RegisteredUser;
 import bookclub.bookclubspring.domain.user.User;
-
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-
+@Builder
 public class RegisteredUserSaveRequestDto {
-    private String mobile;
     private User user;
+    private String mobile;
     private String introduce;
     private Boolean reservationReminder;
     private Boolean alert;
 
     @Builder
-    public RegisteredUserSaveRequestDto(User user, String mobile, String introduce,
-                                        Boolean reservationReminder, Boolean alert) {
+    public RegisteredUserSaveRequestDto(User user, String mobile, String introduce, Boolean reservationReminder, Boolean alert ) {
         this.user = user;
         this.mobile = mobile;
         this.introduce = introduce;

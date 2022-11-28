@@ -14,13 +14,13 @@ public class RegisteredUserResponseDto {
     private Boolean reservationReminder;
     private Boolean alert;
 
-    public RegisteredUserResponseDto(RegisteredUser entity) {
-        this.id = entity.getId();
-        this.user = entity.getUser();
-        this.name = entity.getUser().getName();
-        this.mobile = entity.getMobile();
-        this.introduce = entity.getIntroduce();
-        this.reservationReminder = entity.getReservationReminder();
-        this.alert = entity.getAlert();
+    public RegisteredUserResponseDto(RegisteredUser registeredUser) {
+        this.id = registeredUser.getId();
+        this.user = registeredUser.getUser();
+        this.name = registeredUser.getUser().getName();
+        this.mobile = registeredUser.getMobile();
+        this.introduce = registeredUser.getIntroduce();
+        this.reservationReminder = registeredUser.getReservationReminder();
+        this.alert = registeredUser.getAlert();
     }
 }

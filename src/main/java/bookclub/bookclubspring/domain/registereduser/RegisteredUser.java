@@ -42,13 +42,11 @@ public class RegisteredUser {
         this.alert = alert;
     }
 
-    public RegisteredUser update(User user, String mobile, String introduce, Boolean reservationReminder, Boolean alert) {
+    public void update(User user, String mobile, String introduce, Boolean reservationReminder, Boolean alert) {
         this.user = user;
         this.mobile = mobile;
         this.introduce = introduce;
         this.reservationReminder = reservationReminder;
         this.alert = alert;
-
-        return this;
     }
 }
